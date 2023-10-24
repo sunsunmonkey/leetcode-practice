@@ -26,11 +26,11 @@ var getIntersectionNode = function (headA, headB) {
   }
 
   if (ALength > BLength) {
-    for (let i = 0; i < ALength - BLength+1; i++) {
+    for (let i = 0; i < ALength - BLength; i++) {
       headA = headA.next;
     }
   } else {
-    for (let i = 0; i < BLength - ALength+1; i++) {
+    for (let i = 0; i < BLength - ALength; i++) {
       headB = headB.next;
     }
   }
