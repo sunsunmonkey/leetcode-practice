@@ -53,3 +53,47 @@ function inorderTraversal(root: TreeNode | null): number[] {
   }
   return res;
 }
+
+function preorderTraversal(root: TreeNode | null): number[] {
+  let helperStack: (TreeNode | null)[] = [];
+  let res: number[] = [];
+  let curNode: TreeNode | null;
+
+  if (root === null) return res;
+
+  while (helperStack.length > 0) {
+    curNode = helperStack.pop()!;
+    if (curNode !== null) {
+      if (curNode.right !== null) helperStack.push(curNode.right);
+      if (curNode.left !== null) helperStack.push(curNode.left);
+      helperStack.push(curNode);
+      helperStack.push(null);
+    } else {
+      curNode = helperStack.pop()!;
+      res.push(curNode.val);
+    }
+  }
+  return res;
+}
+
+function inorderTraversalNormal(root: TreeNode | null): number[] {
+  let helperStack: (TreeNode | null)[] = [];
+  let res: number[] = [];
+  let curNode: TreeNode | null;
+
+  if (root === null) return res;
+
+  while (helperStack.length > 0) {
+    curNode = helperStack.pop()!;
+    if (curNode !== null) {
+      if (curNode.right !== null) helperStack.push(curNode.right);
+      helperStack.push(curNode);
+      helperStack.push(null);
+      if (curNode.left !== null) helperStack.push(curNode.left);
+    } else {
+      curNode = helperStack.pop()!;
+      res.push(curNode.val);
+    }
+  }
+  return res;
+}
