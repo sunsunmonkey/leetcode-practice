@@ -10,14 +10,13 @@ class TreeNode {
 }
 
 function isSymmetric(root: TreeNode | null): boolean {
-  const right = root?.right || null;
-  const left = root?.left || null;
-  if (right === null && left === null) return true;
-  else if (right === null || left === null) return false;
-  else if (right.val !== left.val) return false;
-  else return compare(left, right) && compare(right, left);
-
-  function compare(left: TreeNode, right: TreeNode) {
-    return left.left?.val === right.right?.val;
+  function compare(left: TreeNode | null, right: TreeNode | null) {
+    if (left === null && right === null) return true;
+    else if (left === null || right === null) return false;
+    else if (left?.val !== right?.val) return false;
+    else
+      return compare(left.left, right.right) && compare(left.right, right.left);
   }
+  if (root === null) return true;
+  return compare(root.left, root.right);
 }
