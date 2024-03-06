@@ -4,7 +4,6 @@ function restoreIpAddresses(s: string): string[] {
 
   function backTrace(startIndex: number) {
     if (helper.length === 4 && startIndex === s.length) {
-      console.log("11", helper);
       resArr.push(helper.join("."));
       return;
     }
@@ -22,7 +21,6 @@ function restoreIpAddresses(s: string): string[] {
   }
 
   backTrace(0);
-  console.log("res", resArr);
   return resArr;
 }
 
