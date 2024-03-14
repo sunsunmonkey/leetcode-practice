@@ -1,37 +1,38 @@
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
+class ListNode {
+  val: number;
+  next: ListNode | null;
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
 
-/**
- * @param {ListNode} headA
- * @param {ListNode} headB
- * @return {ListNode}
- */
-var getIntersectionNode = function (headA, headB) {
+function getIntersectionNode(
+  headA: ListNode | null,
+  headB: ListNode | null
+): ListNode | null {
+  let temA = headA;
+  let temB = headB;
   let ALength = 0;
   let BLength = 0;
-  let tempA = headA;
-  let tempB = headB;
-  while (tempA) {
-    tempA = tempA.next;
+
+  while (temA) {
+    temA = temA.next;
     ALength++;
   }
-  while (tempB) {
-    tempB = tempB.next;
+
+  while (temB) {
+    temB = temB.next;
     BLength++;
   }
 
   if (ALength > BLength) {
     for (let i = 0; i < ALength - BLength; i++) {
-      headA = headA.next;
+      headA = headA?.next!;
     }
   } else {
     for (let i = 0; i < BLength - ALength; i++) {
-      headB = headB.next;
+      headB = headB?.next!;
     }
   }
 
@@ -39,8 +40,10 @@ var getIntersectionNode = function (headA, headB) {
     if (headA === headB) {
       return headA;
     }
+
     headA = headA.next;
     headB = headB.next;
   }
+
   return null;
-};
+}
