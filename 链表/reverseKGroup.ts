@@ -7,41 +7,36 @@ class ListNode {
   }
 }
 function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
-  const hair = new ListNode(0);
+  const hair = new ListNode();
   hair.next = head;
-  let pre = hair;
+  let prev = hair;
 
-  function myReverse(head, tail) {
+  function myReverse(head: ListNode | null, tail: ListNode) {
     let prev = tail.next;
-    let p = head;
-
+    let cur: ListNode | null = head;
     while (prev !== tail) {
-      const nex = p.next;
-      p.next = prev;
-      prev = p;
-      p = nex;
+      const temp = cur?.next;
+      cur!.next = prev;
+      prev = cur;
+      cur = temp!;
     }
 
-    return [tail, head];
+    return [head, tail];
   }
-
   while (head) {
-    let tail = pre;
+    let tail: ListNode | null = prev;
+
     for (let i = 0; i < k; i++) {
       tail = tail.next!;
       if (!tail) {
         return hair.next;
       }
     }
+    [tail, head] = myReverse(head, tail);
 
-    const nex = tail.next;
-    [head, tail] = myReverse(head, tail);
-
-    pre.next = head;
-    tail.next = nex;
-    pre = tail;
-    head = tail.next;
+    prev.next = head;
+    prev = tail!;
+    head = tail?.next!;
   }
-
   return hair.next;
 }
