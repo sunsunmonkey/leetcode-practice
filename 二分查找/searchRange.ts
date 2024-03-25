@@ -28,4 +28,4 @@ function searchRange(nums: number[], target: number): number[] {
   return res;
 }
 
-searchRange([5, 7, 7, 8, 8, 10], 8);
+
